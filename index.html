@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Gallary — A Photo Catalog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=Space+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/style.css"
+  </head>
+  <body>
+    <header class="site-head">
+      <div class="head-row">
+        <p class="eyebrow">Est. 2026 — No. 001</p>
+        <h1 class="wordmark">Image Gallary<span class="dot">.</span></h1>
+        <p class="eyebrow head-sub">A Photo Catalog</p>
+      </div>
+    </header>
+
+    <nav class="filter-bar" aria-label="Filter gallery by category">
+      <button class="filter-chip is-active" data-filter="all"> All <span class="count" id="count-all"></span>
+      </button>
+      <button class="filter-chip" data-filter="camera">Camera</button>
+      <button class="filter-chip" data-filter="download">
+        Download
+      </button>
+      <button class="filter-chip" data-filter="image">Images</button>
+    </nav>
+
+    <main class="gallery" id="gallery">
+      <!-- Gallery items injected by JavaScript -->
+    </main>
+
+    <div
+      class="lightbox"
+      id="lightbox"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+    >
+      <button class="lb-close" id="lb-close" aria-label="Close lightbox">
+        &times;
+      </button>
+      <button class="lb-nav lb-prev" id="lb-prev" aria-label="Previous image">
+        &#8249;
+      </button>
+
+      <figure class="lb-figure">
+        <div class="lb-img-wrap">
+          <img class="lb-img" id="lb-img" src="" alt="" />
+        </div>
+        <figcaption class="lb-caption">
+          <span class="lb-plate" id="lb-plate"></span>
+          <span class="lb-title" id="lb-title"></span>
+          <span class="lb-meta" id="lb-meta"></span>
+        </figcaption>
+      </figure>
+
+      <button class="lb-nav lb-next" id="lb-next" aria-label="Next image">
+        &#8250;
+      </button>
+      <p class="lb-index" id="lb-index"></p>
+    </div>
+
+    <footer class="site-foot">
+      <p>Use ← → to navigate a plate in view. Press Esc to close.</p>
+    </footer>
+
+    <script src="/script.js"></script>
+  </body>
+</html>
