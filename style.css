@@ -1,6 +1,5 @@
 /* ============================================================
-   Plates — A Photographic Catalog
-   Palette: near-black ground, ivory paper, worn brass accent
+   Image Gallary — A Photo Catalog
    ============================================================ */
 
 :root{
@@ -12,9 +11,9 @@
   --brass-soft: rgba(176, 141, 87, 0.35);
   --line:       rgba(237, 231, 218, 0.14);
 
-  --display: "Fraunces", serif;
-  --body:    "Inter", sans-serif;
-  --mono:    "Space Mono", monospace;
+  --display: "Times New Roman", Times, serif;
+  --body:    "Times New Roman", Times, serif;
+  --mono:    "Times New Roman", Times, serif;
 }
 
 *{ box-sizing: border-box; }
@@ -117,7 +116,7 @@ body{
   margin: 0 0 3rem;
 }
 
-.plate{
+.image{
   position: relative;
   overflow: hidden;
   background: var(--ink-soft);
@@ -132,9 +131,9 @@ body{
   to{ opacity: 1; transform: translateY(0); }
 }
 
-.plate.is-hidden{ display: none; }
+.image.is-hidden{ display: none; }
 
-.plate img{
+.image img{
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -144,12 +143,12 @@ body{
   transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
 }
 
-.plate:hover img{
+.image:hover img{
   transform: scale(1.08);
   filter: grayscale(0%) brightness(1);
 }
 
-.plate-overlay{
+.image-overlay{
   position: absolute;
   inset: 0;
   display: flex;
@@ -162,13 +161,13 @@ body{
   transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-.plate:hover .plate-overlay,
-.plate:focus-visible .plate-overlay{
+.image:hover .plate-overlay,
+.image:focus-visible .plate-overlay{
   opacity: 1;
   transform: translateY(0);
 }
 
-.plate-num{
+.image-num{
   font-family: var(--mono);
   font-size: 0.68rem;
   letter-spacing: 0.1em;
@@ -176,14 +175,14 @@ body{
   text-transform: uppercase;
 }
 
-.plate-title{
+.image-title{
   font-family: var(--display);
   font-size: 1.15rem;
   font-weight: 500;
   margin: 0.15rem 0 0;
 }
 
-.plate-cat{
+.image-cat{
   font-family: var(--mono);
   font-size: 0.65rem;
   letter-spacing: 0.08em;
@@ -192,7 +191,7 @@ body{
   margin-top: 0.3rem;
 }
 
-.plate:focus-visible{
+.image:focus-visible{
   outline: 2px solid var(--brass);
   outline-offset: -2px;
 }

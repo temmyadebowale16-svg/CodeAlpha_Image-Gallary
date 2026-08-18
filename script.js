@@ -1,9 +1,9 @@
 /* ============================================================
-   Plates — A Photographic Catalog
+   Image Gallary — A Photo Catalog
    Gallery rendering, category filtering, lightbox navigation
    ============================================================ */
 
-const PLATES = [
+const IMAGES = [
   { id: 1,  title: "images (1)",        category: "download",       year: "2024", src: "CodeAlpha_ImageGallary/images (1).jpg" },
   { id: 2,  title: "104g1d6id",        category: "image", year: "2023", src: "CodeAlpha_ImageGallary/104g1d6idrg2f84r30mw169935e730c0b5.png" },
   { id: 3,  title: "0000000dc98",    category: "camera",       year: "2022", src: "CodeAlpha_ImageGallary/file_00000000dc98620a9c65560dd4fd97ef.png" },
@@ -32,46 +32,45 @@ const lbPrev      = document.getElementById("lb-prev");
 const lbNext      = document.getElementById("lb-next");
 
 let activeFilter = "all";
-let visiblePlates = [...PLATES];
+let visiblePlates = [...IMAGES];
 let currentIndex = 0;
 
 function plateNumber(id){
-  return "PLATE №" + String(id).padStart(3, "0");
+  return "IMAGES NO " + String(id).padStart(3, "0");
 }
 
 function renderGallery(){
   galleryEl.innerHTML = "";
-  PLATES.forEach((plate, i) => {
+  IMAGES.forEach((image, i) => {
     const fig = document.createElement("figure");
-    fig.className = "plate";
-    fig.dataset.category = plate.category;
-    fig.dataset.id = plate.id;
+    fig.className = "image";
+    fig.dataset.category = image.category;
+    fig.dataset.id = image.id;
     fig.tabIndex = 0;
     fig.setAttribute("role", "button");
-    fig.setAttribute("aria-label", `Open ${plate.title} in lightbox`);
+    fig.setAttribute("aria-label", `Open ${image.title} in lightbox`);
     fig.style.animationDelay = (i * 0.04) + "s";
 
     fig.innerHTML = `
-      <img src="${plate.src}" alt="${plate.title}, ${plate.category} photograph" loading="lazy" />
+      <img src="${image.src}" alt="${image.title}, ${image.category} photograph" loading="lazy" />
       <figcaption class="plate-overlay">
-        <span class="plate-num">${plateNumber(plate.id)}</span>
-        <h2 class="plate-title">${plate.title}</h2>
-        <span class="plate-cat">${plate.category} — ${plate.year}</span>
+        <h2 class="plate-title">${image.title}</h2>
+        <span class="plate-cat">${image.category} — ${image.year}</span>
       </figcaption>
     `;
 
-    fig.addEventListener("click", () => openLightbox(plate.id));
+    fig.addEventListener("click", () => openLightbox(image.id));
     fig.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        openLightbox(plate.id);
+        openLightbox(image.id);
       }
     });
 
     galleryEl.appendChild(fig);
   });
 
-  document.getElementById("count-all").textContent = "(" + PLATES.length + ")";
+  document.getElementById("count-all").textContent = "(" + IMAGES.length + ")";
   applyFilter(activeFilter);
 }
 
@@ -82,15 +81,15 @@ function applyFilter(category){
     btn.classList.toggle("is-active", btn.dataset.filter === category);
   });
 
-  const plates = document.querySelectorAll(".plate");
+  const plates = document.querySelectorAll(".image");
   plates.forEach(el => {
     const match = category === "all" || el.dataset.category === category;
     el.classList.toggle("is-hidden", !match);
   });
 
   visiblePlates = category === "all"
-    ? [...PLATES]
-    : PLATES.filter(p => p.category === category);
+    ? [...IMAGES]
+    : IMAGES.filter(p => p.category === category);
 }
 
 filterBtns.forEach(btn => {
@@ -115,21 +114,21 @@ function closeLightbox(){
 }
 
 function showPlate(index){
-  const plate = visiblePlates[index];
-  if (!plate) return;
+  const image = visiblePlates[index];
+  if (!image) return;
 
   lbImg.classList.remove("is-visible");
 
   const nextImg = new Image();
   nextImg.onload = () => {
-    lbImg.src = plate.src;
+    lbImg.src = image.src;
     requestAnimationFrame(() => lbImg.classList.add("is-visible"));
   };
-  nextImg.src = plate.src;
+  nextImg.src = image.src;
 
-  lbPlate.textContent = plateNumber(plate.id);
-  lbTitle.textContent = plate.title;
-  lbMeta.textContent = plate.category + " — " + plate.year;
+  lbPlate.textContent = plateNumber(image.id);
+  lbTitle.textContent = image.title;
+  lbMeta.textContent = image.category + " — " + image.year;
   lbIndex.textContent = (index + 1) + " / " + visiblePlates.length;
 }
 
